@@ -1,39 +1,114 @@
-const container = document.createElement("div");
-container.setAttribute("class", "container");
+$(document).ready(function() {
+  $(document).on("click", ".foodtruck-data", function() {
+    var latLong = {
+      lat: parseFloat($(this).attr("data-latitude")),
+      lng: parseFloat($(this).attr("data-longitude"))
+    };
+    database.ref().set(latLong);
 
-app.appendChild(logo);
-app.appendChild(container);
+    console.log(latLong);
 
-var request = new HttpRequest();
-request.open(
-  "GET",
-  "https://my.api.mockaroo.com/locations.json?key=a45f1200",
-  true
-);
-request.onload = function() {
-  // Begin accessing JSON data here
-  var data = JSON.parse(this.response);
-  if (request.status >= 3 && request.status < 5) {
-    data.forEach(movie => {
-      const card = document.createElement("div");
-      card.setAttribute("class", "card");
+    addMarkerAndZoom(latLong, 16);
 
-      const h1 = document.createElement("h1");
-      h1.textContent = foodTruck;
+    function initMap() {
+      var markers = [];
+      var map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 8,
+        center: { lat: 38.899265, lng: -77.1546525 }
+      });
 
-      const p = document.createElement("p");
-      foodTruck.description = foodTruck.description.substring(0, 300);
-      p.textContent = `${foodTruck.description}...`;
+      map.addListener("click", function(e) {
+        //Remove previous marker and add new one
+        // removeMarker(null, markers)
+        var latitude = e.latLng.lat();
+        var longitude = e.latLng.lng();
+        console.log("Latitude: " + latitude + " Longitude: " + longitude);
+        var marker = addMarker(map, { lat: latitude, lng: longitude });
+        markers.push(marker);
+      });
 
-      container.appendChild(card);
-      card.appendChild(h1);
-      card.appendChild(p);
+      function removeMarker(map, markers) {
+        for (var i = 0; i < markers.length; i++) {
+          makers[i].setMap(map);
+        }
+      }
+      function addMarker(map, center) {
+        var marker = new google.maps.Marker({
+          position: center,
+          map: map
+        });
+      }
+    }
+
+    function addMarkerAndZoom(center, zoom) {
+      map.setCenter(center);
+      map.setZoom(zoom);
+    }
+  });
+
+  function addMarker(center) {
+    marker = new google.maps.Marker({
+      position: center,
+      map: map
     });
-  } else {
-    const errorMessage = document.createElement("error");
-    errorMessage.textContent = `error, try again`;
-    app.appendChild(errorMessage);
   }
-};
 
-request.send();
+  function truckSearch() {
+    $("#run-search").on("click", function(event) {
+      event.preventDefault();
+
+      // Captures the users input for zipcode and raduis search.
+      var userZipcodeInput = $("#zipcode-input")
+        .val()
+        .trim();
+      var userRadiusInput = $("#radius-input")
+        .val()
+        .trim();
+
+      var isValid = validateZipCode(userZipcodeInput);
+
+      console.log("User entered zipcode: " + userZipcodeInput);
+      console.log("User entered radius: " + userRadiusInput);
+
+      //   food truck api access
+      // https://my.api.mockaroo.com/locations.json?key=a45f1200
+
+      var truckQueryURL =
+        "https://my.api.mockaroo.com/locations.json?key=a45f1200" +
+        userZipcodeInput +
+        "&radius=" +
+        userRadiusInput +
+        "&page=0&api_key=" +
+        apikey;
+
+      // clear out table for new results
+      $("#event-table > tbody").empty();
+
+      $.ajax({
+        url: truckQueryURL,
+        method: "GET"
+      }).then(function(response) {
+        var results = response.Events; //Creates a new object.
+        // console.log(results.length);
+        console.log(results);
+
+        for (var i = 0; i < results.length; i++) {
+          var latitude = results[i].Venue.Latitude;
+          var longitude = results[i].Venue.Longitude;
+
+          addMarker({ lat: latitude, lng: longitude });
+          map.setCenter({ lat: latitude, lng: longitude });
+
+          var foodTruckLocation = moment(truckLocation).format("lat,long");
+        }
+      });
+    });
+  }
+  truckSearch();
+
+  function validateZipCode(elementValue) {
+    var zipCodePattern = /^\d{5}$|^\d{5}-\d{4}$/;
+    return zipCodePattern.test(elementValue);
+  }
+  // NO CODE BELOW THIS LINE
+});
