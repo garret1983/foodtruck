@@ -100,6 +100,50 @@ $(document).ready(function() {
           map.setCenter({ lat: latitude, lng: longitude });
 
           var foodTruckLocation = moment(truckLocation).format("lat,long");
+
+          for (var i = 0; i < results.length; i++) {
+            var eventDate = results[i].Date;
+            var artistsName = results[i].Artists[0].Name;
+            var venueName = results[i].Venue.Name;
+            var venueAddress = results[i].Venue.Address;
+            var venueCity = results[i].Venue.City;
+            var venueState = results[i].Venue.State;
+            var url = results[i].TicketUrl;
+            var latitude = results[i].Venue.Latitude;
+            var longitude = results[i].Venue.Longitude;
+
+            addMarker({ lat: latitude, lng: longitude });
+            map.setCenter({ lat: latitude, lng: longitude });
+
+            var prettyEventDate = moment(eventDate).format("MMMM DD, YYYY");
+            // console.log(prettyEventDate);
+            // console.log(moment);
+            // console.log(eventDate);
+
+            var venueRow = $("<tr/>");
+            venueRow.addClass("venue-data");
+            venueRow.attr("data-latitude", results[i].Venue.Latitude);
+            venueRow.attr("data-longitude", results[i].Venue.Longitude);
+
+            venueRow.append(
+              "<td>" +
+                prettyEventDate +
+                "</td><td>" +
+                artistsName +
+                "</td><td>" +
+                venueName +
+                "</td><td class='address'>" +
+                venueAddress +
+                "</td><td>" +
+                venueCity +
+                "</td><td>" +
+                venueState +
+                "</td>"
+            );
+
+            $("#event-table > tbody").append(venueRow);
+            //console.log(venueRow);
+          }
         }
       });
     });
