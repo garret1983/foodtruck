@@ -76,23 +76,24 @@ $(document).ready(function() {
       // var truckApiKey = "a45f1200";
 
       var truckQueryURL =
-        "https://my.api.mockaroo.com/locations.json?key=a45f1200" +
-        // userZipcodeInput +
-        // "&radius=" +
-        // userRadiusInput +
-        // "&page=0&api_key=" +
-        // truckQueryURL;
+        "https://my.api.mockaroo.com/locations.json?key=a45f1200";
+      // +
+      // userZipcodeInput +
+      // "&radius=" +
+      // userRadiusInput +
+      // "&page=0&api_key=" +
+      // truckQueryURL;
 
-        // clear out table for new results
-        $("#event-table > tbody").empty();
+      // clear out table for new results
+      $("#event-table > tbody").empty();
 
       $.ajax({
         url: truckQueryURL,
         method: "GET"
       }).then(function(response) {
-        var results = response.Trucks; //Creates a new object.
+        var results = response.foodTruck; //Creates a new object.
         // console.log(results.length);
-        console.log(results);
+        // console.log(results);
 
         for (var i = 0; i < results.length; i++) {
           var latitude = results[i].Venue.Latitude;
