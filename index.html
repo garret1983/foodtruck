@@ -11,7 +11,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
 
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,32 +23,52 @@
         <!-- Brand -->
         <a class="navbar-brand text-dark" href="#"><img src="images/rioseo-logo.png"></a>
 
-            <!-- Links -->
-            <ul class="navbar-nav text-align-right">
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="#">Menu</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" href="#"><i class="fa fa-map-marker-alt text-muted"></i> Truck Locator</a>
-                </li>
-            </ul>
+        <!-- links -->
+        <ul class="navbar-nav text-align-right">
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="#">Menu</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="#"><i class="fa fa-map-marker-alt text-muted" id="run-search"></i> Truck Locator</a>
+            </li>
+        </ul>
     </nav>
 
 
+    <br>
+
 
     <!-- insert food truck cards here  -->
-
-
-    <!-- maps goes here -->
     <div class="container">
-        <div class="col-lg-6">
-            <div class="panel panel-primary">
-                <div class="panel-body">
-                    <br>
-                    <form role="form">
-                        <div id="googleMap" style="width:100%;height:250px;"></div>
-                        <div id="map"></div>
-                    </form>
+        <div class="row">
+            <div class="col lg-6 md-6 sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <p>header</p>
+                    </div>
+                    <div class="card-body">
+                        <p>body</p>
+
+                    </div>
+                    <div class="card-footer">
+                        <p>footer</p>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- maps goes here -->
+
+            <div class="col lg-6 md-6 sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-body">
+                        <br>
+                        <form role="form">
+                            <div id="googleMap" style="width:100%;height:600px;"></div>
+                            <div id="map"></div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

@@ -73,13 +73,15 @@ $(document).ready(function() {
       //   food truck api access
       // https://my.api.mockaroo.com/locations.json?key=a45f1200
 
+      var truckApiKey = "a45f1200";
+
       var truckQueryURL =
-        "https://my.api.mockaroo.com/locations.json?key=a45f1200" +
+        "https://my.api.mockaroo.com/locations.json?" +
         userZipcodeInput +
         "&radius=" +
         userRadiusInput +
         "&page=0&api_key=" +
-        apikey;
+        truckQueryURL;
 
       // clear out table for new results
       $("#event-table > tbody").empty();
@@ -102,13 +104,10 @@ $(document).ready(function() {
           var foodTruckLocation = moment(truckLocation).format("lat,long");
 
           for (var i = 0; i < results.length; i++) {
-            var eventDate = results[i].Date;
-            var artistsName = results[i].Artists[0].Name;
-            var venueName = results[i].Venue.Name;
-            var venueAddress = results[i].Venue.Address;
-            var venueCity = results[i].Venue.City;
-            var venueState = results[i].Venue.State;
-            var url = results[i].TicketUrl;
+            var foodTruck = results[i].Food[0].Truck;
+            var address = results[i].Address;
+            var openHours = results[i].Opoen.Hours;
+            var phoneNumber = results[i].Phone.Number;
             var latitude = results[i].Venue.Latitude;
             var longitude = results[i].Venue.Longitude;
 
@@ -156,3 +155,16 @@ $(document).ready(function() {
   }
   // NO CODE BELOW THIS LINE
 });
+
+// ajax call to GET
+
+// $(document).ready(function() {
+//   $.ajax({
+//     method: "GET",
+//     url: "https://my.api.mockaroo.com/locations.json?key=a45f1200",
+//     dataType: "json"
+//   }).success(function(response) {
+//     // work with response data here
+//     console.log(response);
+//   });
+// });
