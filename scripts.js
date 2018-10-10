@@ -106,8 +106,8 @@ $(document).ready(function() {
           for (var i = 0; i < results.length; i++) {
             var foodTruck = results[i].Food[0].Truck;
             var address = results[i].Address;
-            var openHours = results[i].Opoen.Hours;
             var phoneNumber = results[i].Phone.Number;
+            var openHours = results[i].Opoen.Hours;
             var latitude = results[i].Venue.Latitude;
             var longitude = results[i].Venue.Longitude;
 
@@ -169,16 +169,3 @@ $(document).ready(function() {
   }
   // NO CODE BELOW THIS LINE
 });
-
-// ajax call to GET
-
-// $(document).ready(function() {
-//   $.ajax({
-//     method: "GET",
-//     url: "https://my.api.mockaroo.com/locations.json?key=a45f1200",
-//     dataType: "json"
-//   }).success(function(response) {
-//     // work with response data here
-//     console.log(response);
-//   });
-// });
