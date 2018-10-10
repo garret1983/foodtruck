@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $(document).on("click", ".foodtruck-data", function() {
+  $(document).on("click", ".foodtruck-array", function() {
     var latLong = {
       lat: parseFloat($(this).attr("data-latitude")),
       lng: parseFloat($(this).attr("data-longitude"))
@@ -58,17 +58,17 @@ $(document).ready(function() {
       event.preventDefault();
 
       // Captures the users input for zipcode and raduis search.
-      var userZipcodeInput = $("#zipcode-input")
-        .val()
-        .trim();
-      var userRadiusInput = $("#radius-input")
-        .val()
-        .trim();
+      var userZipcodeInput = $("#zipcode-input").val();
+      // .trim();
+      var userRadiusInput = $("#radius-input").val();
+      // .trim();
 
-      var isValid = validateZipCode(userZipcodeInput);
+      // removed user enter zip/radius
 
-      console.log("User entered zipcode: " + userZipcodeInput);
-      console.log("User entered radius: " + userRadiusInput);
+      // var isValid = validateZipCode(userZipcodeInput);
+
+      // console.log("User entered zipcode: " + userZipcodeInput);
+      // console.log("User entered radius: " + userRadiusInput);
 
       //   food truck api access
       // https://my.api.mockaroo.com/locations.json?key=a45f1200
@@ -119,24 +119,38 @@ $(document).ready(function() {
             // console.log(moment);
             // console.log(eventDate);
 
-            var venueRow = $("<tr/>");
-            venueRow.addClass("venue-data");
-            venueRow.attr("data-latitude", results[i].Venue.Latitude);
-            venueRow.attr("data-longitude", results[i].Venue.Longitude);
+            var foodTruckRow = $("<tr/>");
+            foodTruckRow.addClass("truck-data");
+            foodTruckRow.attr("data-latitude", results[i].Truck.Latitude);
+            foodTruckRow.attr("data-longitude", results[i].Truck.Longitude);
 
-            venueRow.append(
+            foodTruckRow.append(
               "<td>" +
-                prettyEventDate +
+                address +
                 "</td><td>" +
-                artistsName +
+                city +
                 "</td><td>" +
-                venueName +
-                "</td><td class='address'>" +
-                venueAddress +
+                state +
                 "</td><td>" +
-                venueCity +
+                postal_code +
                 "</td><td>" +
-                venueState +
+                lattitude +
+                "</td><td>" +
+                longitude +
+                "</td><td>" +
+                monday_open +
+                "</td><td>" +
+                tuesday_open +
+                "</td><td>" +
+                wednesday_open +
+                "</td><td>" +
+                thursday_open +
+                "</td><td>" +
+                friday_open +
+                "</td><td>" +
+                saturday_open +
+                "</td><td>" +
+                sunday_open +
                 "</td>"
             );
 
