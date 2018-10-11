@@ -76,7 +76,7 @@ $(document).ready(function() {
       // var truckApiKey = "a45f1200";
 
       var truckQueryURL =
-        "https://my.api.mockaroo.com/locations.json?key=a45f1200";
+        "https://my.api.mockaroo.com/locations.json?q=california&key=a45f1200";
       // +
       // userZipcodeInput +
       // "&radius=" +
@@ -91,12 +91,12 @@ $(document).ready(function() {
         url: truckQueryURL,
         method: "GET"
       }).then(function(response) {
-        var results = response.foodTruck; //Creates a new object.
-        // console.log(results.length);
-        // console.log(results);
+        var results = response.foodTruck;
+        console.log(results.length);
+        console.log(results);
 
         for (var i = 0; i < results.length; i++) {
-          var latitude = results[i].Venue.Latitude;
+          var latitude = results[i].venue.Latitude;
           var longitude = results[i].Venue.Longitude;
 
           addMarker({ lat: latitude, lng: longitude });
